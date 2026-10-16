@@ -8,8 +8,8 @@
     {
       "name": "social-media-skills",
       "source": ".",
-      "description": "The complete set of Claude skills behind Charlie Hills' content system. 430k+ followers across LinkedIn, Instagram, Substack, X and YouTube. 100m+ views per year. 17 skills covering voice, LinkedIn, Instagram Reels, YouTube thumbnails, analytics, and community.",
-      "version": "1.0.1",
+      "description": "17 standalone social media skills for Codex and Claude, covering user voice, LinkedIn, Reel scripting, Gemini image prompts, analytics and community.",
+      "version": "1.1.0",
       "metadata": {
         "categories": [
           "voice",
@@ -25,10 +25,7 @@
           "instagram reels",
           "infographics",
           "gemini",
-          "apify",
-          "elevenlabs",
-          "heygen",
-          "remotion"
+          "apify"
         ]
       }
     }

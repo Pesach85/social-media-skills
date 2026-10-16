@@ -55,7 +55,7 @@ When this skill triggers, go straight to Step 1. Do not summarise. Start immedia
 - Keep the YAML frontmatter name matching the folder name.
 - Do not break the skill's trigger phrases in the description. Others rely on them.
 - If you change the output format, update the `## Output` section in the skill.
-- Test the skill in your own Claude project before opening a PR.
+- Test the skill in a clean Codex or Claude project before opening a PR.
 
 ## Style rules
 
@@ -77,16 +77,16 @@ These rules apply to every skill in the repo:
 
 ## Testing locally
 
-Copy your skill into Claude's skill directory:
+Follow the README installation route for your assistant. For a single project-local Codex skill, preserve any existing installation:
 
 ```bash
-cp -r skills/my-new-skill ~/.claude/skills/
+test ! -e .agents/skills/my-new-skill && test ! -L .agents/skills/my-new-skill && mkdir -p .agents/skills && cp -R skills/my-new-skill .agents/skills/
 ```
 
-Then trigger it in a new Claude conversation with the phrases listed in the description. Confirm:
+Then trigger it in a fresh task in the selected project with the phrases listed in the description. Confirm:
 
-- Claude picks up the skill on the trigger phrase
-- Inputs are collected correctly (AskUserQuestion renders)
+- The assistant picks up the skill on the trigger phrase
+- Inputs are collected correctly with an available question tool or chat fallback
 - Output matches the format in the skill
 - All external dependencies (Apify, Gemini, etc.) are checked before use
 
@@ -97,3 +97,7 @@ Then trigger it in a new Claude conversation with the phrases listed in the desc
 - Link any related issue
 
 Questions? Open a GitHub issue.
+
+- Run `python3 tests/test-codex-portability.py` for install preservation and portable instruction checks.
+- Report actual provider calls, exports and image inspections separately from static checks.
+- Keep standalone public skills independent of private pipelines, personal accounts and machine paths.
