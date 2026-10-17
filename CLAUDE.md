@@ -46,18 +46,18 @@
 - Categoria inventario: fork skill.
 
 ### Architettura (contesto)
-_Revisione 2026-10-16, metodo Cum scire, fonte GitHub `Pesach85/social-media-skills` @ `a74a4b954380` (sola lettura)._
-- **Stack**: skill Markdown (`SKILL.md` per cartella) + un solo script Bash `validate-skills.sh`; manifest plugin Claude `.claude-plugin/marketplace.json`. "Shell" dell'API è **corretto** ma riflette solo lo script di validazione: il contenuto è Markdown [VERIFICATO: albero + `/languages` (solo Shell) @`a74a4b954380`]
+_Revisione 2026-10-16, metodo Cum scire, fonte GitHub `Pesach85/social-media-skills` @ `a74a4b954380` (sola lettura); riverifica puntuale 2026-10-18 @ `3802501`._
+- **Stack**: skill Markdown (`SKILL.md` per cartella) + script Bash `validate-skills.sh` + un test Python `tests/test-codex-portability.py`; manifest plugin Claude `.claude-plugin/marketplace.json`. `/languages` dice Python + Shell, ma riflette solo questi due file: il contenuto è Markdown [VERIFICATO: albero + `/languages` @`3802501`]
 - **Struttura** [VERIFICATO: albero @`a74a4b954380`]:
   - `skills/` (17): voice-builder, newsletter-voice, post-writer, post-scorer, hook-generator, reels-scripting, …
   - `.claude-plugin/`: manifest marketplace; `assets/`: banner
-  - `HUB_INTEGRATION.md`: unico file locale (vedi confini)
+  - `HUB_INTEGRATION.md`, `CLAUDE.md`: unici file locali (vedi confini)
 - **Flusso dati**: `voice-builder` (about-me.md + voice.md) → `newsletter-voice` → skill per canale (post, video, analytics, community) [VERIFICATO: README]; nell'hub la voce va letta da `config/brand_voice/` dell'hub, non da questo albero [VERIFICATO: `HUB_INTEGRATION.md`]
-- **Comandi build/test** [VERIFICATO: `validate-skills.sh` @`a74a4b954380`; nessun workflow CI]: `./validate-skills.sh` (controlla frontmatter e struttura; sandbox)
-- **Confini / cosa NON toccare**: tutto `skills/` (upstream); non scrivere `about-me.md`/`voice.md` nel vendor tree; niente auto-publish social [VERIFICATO: `HUB_INTEGRATION.md`]; fork 1 avanti (solo `HUB_INTEGRATION.md`, commit `a74a4b954380`) / 3 indietro rispetto a `charlie947/social-media-skills` [VERIFICATO: API compare 2026-10-16]
+- **Comandi build/test** [VERIFICATO: `validate-skills.sh` @`a74a4b954380`; nessun workflow CI]: `./validate-skills.sh` (controlla frontmatter e struttura; sandbox); runner di `tests/test-codex-portability.py` IGNOTO
+- **Confini / cosa NON toccare**: tutto `skills/` (upstream); non scrivere `about-me.md`/`voice.md` nel vendor tree; niente auto-publish social [VERIFICATO: `HUB_INTEGRATION.md`]; fork di `charlie947/social-media-skills`; file locali: `HUB_INTEGRATION.md`, `CLAUDE.md` [VERIFICATO: API compare 2026-10-18]
 - **UI / design**: N/A [VERIFICATO: albero]
 - **Glossario**: *voice SoT* · *newsletter-voice* (fonte di ogni contenuto) · *hook* · *post-scorer* · *vendor module* (clone usato dall'hub)
-- IGNOTO: 0 campi
+- IGNOTO: 1 campo (runner del test Python)
 
 ## 4. Anti-job specifici (Claude qui NON fa)
 - Non esegue script, installer, build o binari del repo fuori da un sandbox approvato.
